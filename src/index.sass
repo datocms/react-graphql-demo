@@ -1,0 +1,130 @@
+/* Global styles
+
+body
+  font-family: 'Source Sans Pro', sans-serif
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  margin: 0
+  font-size: 16px
+  line-height: 1.5
+
+main
+  max-width: 650px
+  margin: 32px auto
+  padding: 0 24px
+
+a
+  text-decoration: none
+
+article
+  margin: 0 auto
+  max-width: 650px
+
+/* Header styles
+
+.Header-header
+  padding: 24px 32px
+  margin-bottom: 32px
+  text-align: center
+
+.Header-h1
+  font-size: 72px
+  background: linear-gradient(to right,#f783de 0%,#3d57ff 50%, #7af8ff 100%)
+  -webkit-background-clip: text
+  -webkit-text-fill-color: transparent
+  background-size: 500%
+
+.Header-h1:hover
+  animation-name: gradient
+  animation-duration: 1s
+  animation-iteration-count: 1
+  animation-fill-mode: forwards
+
+.Header-nav
+  max-width: 650px
+  margin: 0 auto
+
+.Header-isActive
+  font-weight: bold
+  text-decoration: underline
+
+.Header-navLink
+  margin-left: 10px
+  margin-right: 10px
+
+.Header-navLink:hover
+
+/* Home
+
+.Home-ul
+  padding: 0
+
+.Home-li
+  margin-bottom: 16px
+  border: 1px solid #eee
+  overflow: hidden
+  border-radius: 5px
+
+.Home-link
+  display: flex
+  color: #000
+  align-items: center
+  height: 180px
+  &:hover
+    box-shadow: 1px 1px 5px #999
+
+.Home-img
+  display: block
+  object-fit: cover
+  height: 100%
+  width: 30%
+  margin-right: 30px
+
+.Home-showMoreWrapper
+  display: flex
+  justify-content: center
+
+.Home-button
+  width: 100%
+  font-size: 16px
+  color: white
+  font-weight: bold
+  text-transform: uppercase
+  padding: 16px 24px
+  background: deepskyblue
+  border: none
+  border-radius: 0
+  cursor: pointer
+  &:disabled
+    background: grey
+    cursor: not-allowed
+
+/* About
+
+.About-infoHeader
+  text-align: center
+
+.About-img
+  height: 120px
+  width: auto
+
+.About-author
+  margin-bottom: 72px
+
+/* Post
+article
+  text-align: center
+
+.Post-placeholder
+  height: 366px
+  text-align: center
+  img
+    object-fit: cover
+    height: 100%
+
+
+@keyframes gradient
+  0%
+    background-position: 0% 50%
+  100%
+    background-position: 100%
