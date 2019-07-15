@@ -13,6 +13,7 @@ a
 #root
   max-width: 1000px
   margin: 0 auto
+  padding: 0 20px
 
 /* Header styles
 
@@ -86,13 +87,14 @@ a
   margin-right: 30px
 
 .Home-button
-  width: 100%
   font-size: 16px
+  text-align: center
   color: white
   font-weight: bold
   text-transform: uppercase
   padding: 16px 24px
   background: #000
+  display: block
   cursor: pointer
 
 .Home-button:disabled
@@ -117,17 +119,56 @@ a
 .About-author
   margin-bottom: 72px
 
-/* Post
-article
-  text-align: center
+/* Recipe
+.Recipe-flag
+  display: flex
+  align-items: center
+  margin-bottom: 48px
 
-.Post-placeholder
+.Recipe-title
+  text-align: center
+  font-size: 48px
+  text-transform: uppercase
+
+.Recipe-abstract
+  font-size: 16px
+  margin-bottom: 48px
+
+.Recipe-cover
+  width: 100%
+  margin-bottom: 48px
+
+.Recipe-flag-image
+  width: 50%
+
+.Recipe-cover, .Recipe-flag-image
   height: 366px
+  padding: 20px 0
+  border-top: 4px solid #000
+  border-bottom: 4px solid #000
   text-align: center
-  img
-    object-fit: cover
-    height: 100%
+  object-fit: cover
+  margin-right: 20px
 
+.Recipe-box
+  padding: 10px
+  box-shadow: 4px 4px 0px 0px #000
+  background-color: #ffb073
+  max-width: 500px
+  margin: 0 auto
+  margin-bottom: 48px
+
+.Recipe-box-title
+  margin: 0
+  text-transform: uppercase
+
+.Recipe-flag-text
+  padding: 10px
+
+.Recipe-flag-number
+  font-weight: bold
+  font-size: 40px
+  margin-right: 20px
 
 @keyframes gradient
   0%

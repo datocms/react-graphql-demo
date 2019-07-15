@@ -2,34 +2,42 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import client from "../client.js";
 
-const RECIPES_PER_PAGE = 4;
+const RECIPES_PER_PAGE = 2;
 
-const Home = () => {
+const Home = props => {
   const [recipes, setRecipes] = useState();
+  const [skip, setSkip] = useState(0);
   const [isFetching, setIsFetching] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await client.request(query, variables);
-        setRecipes(result.recipes);
-        setIsFetching(false);
-      } catch (error) {
-        console.error(JSON.stringify(error, undefined, 2));
-        setIsFetching(false);
-      }
-    };
+  useEffect(
+    () => {
+      const variables = {
+        skip,
+        first: RECIPES_PER_PAGE
+      };
+      const fetchData = async () => {
+        try {
+          const result = await client.request(query, variables);
+          setRecipes(result);
+          setIsFetching(false);
+        } catch (error) {
+          console.error(JSON.stringify(error, undefined, 2));
+          setIsFetching(false);
+        }
+      };
 
-    fetchData();
-  }, []);
+      fetchData();
+    },
+    [skip]
+  );
 
   return (
     <section>
       <ul className="Home-ul">
         {recipes &&
-          recipes.map(recipe => (
+          recipes.recipes.map(recipe => (
             <li className="Home-li" key={`recipe-${recipe.id}`}>
-              <Link to={`/recipe/${recipe.slug}`} className="Home-link">
+              <Link to={`/recipes/${recipe.slug}`} className="Home-link">
                 <img
                   alt={recipe.title}
                   className="Home-img"
@@ -49,8 +57,12 @@ const Home = () => {
             </li>
           ))}
       </ul>
-      {recipes && recipes.length > RECIPES_PER_PAGE && (
-        <button className="Home-button" disabled={isFetching}>
+      {recipes && recipes.meta.count > RECIPES_PER_PAGE && (
+        <button
+          className="Home-button"
+          disabled={isFetching}
+          onClick={() => setSkip(skip + RECIPES_PER_PAGE)}
+        >
           {isFetching ? "Loading..." : "Show More Recipes"}
         </button>
       )}
@@ -74,10 +86,5 @@ const query = `
     }
   }
 `;
-
-const variables = {
-  skip: 0,
-  first: RECIPES_PER_PAGE
-};
 
 export default Home;

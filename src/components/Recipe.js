@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import client from "../client.js";
 import Markdown from "react-markdown";
+import Imgix from "react-imgix";
 
 const Recipe = props => {
   const [recipe, setRecipe] = useState();
@@ -34,23 +35,47 @@ const Recipe = props => {
       ) : (
         recipe && (
           <article>
-            <h1>{recipe.title}</h1>
-            <div className="Recipe-placeholder">
-              <img alt={recipe.title} src={recipe.coverImage.url} />
+            <h1 className="Recipe-title">{recipe.title}</h1>
+            <Markdown
+              source={recipe.abstract}
+              escapeHtml={false}
+              className="Recipe-abstract"
+            />
+            <Imgix
+              alt={recipe.title}
+              src={recipe.coverImage.url}
+              sizes="100vw"
+              className="Recipe-cover"
+            />
+            <div className="Recipe-box">
+              <h5 className="Recipe-box-title">Ingredients</h5>
+              <Markdown source={recipe.ingredients} escapeHtml={false} />
             </div>
-            <Markdown source={recipe.abstract} escapeHtml={false} />
-            {recipe.content.map(block => {
+            {recipe.content.map((block, i) => {
               if (block.__typename === "TextImageBlockRecord") {
                 return (
-                  <div key={block.id}>
-                    <img alt={block.image.alt} src={block.image.url} />
-                    <Markdown source={block.text} escapeHtml={false} />
+                  <div key={block.id} className="Recipe-flag">
+                    <div className="Recipe-flag-number">{i + 1}</div>
+                    <Imgix
+                      alt={block.image.alt}
+                      src={block.image.url}
+                      sizes="50vw"
+                      className="Recipe-flag-image"
+                    />
+                    <Markdown
+                      source={block.text}
+                      className="Recipe-flag-text"
+                    />
                   </div>
                 );
               } else if (block.__typename === "TextBlockRecord") {
                 return (
-                  <div key={block.id}>
-                    <p>{block.text}</p>
+                  <div key={block.id} className="Recipe-flag">
+                    <div className="Recipe-flag-number">{i + 1}</div>
+                    <Markdown
+                      source={block.text}
+                      className="Recipe-flag-text"
+                    />
                   </div>
                 );
               }
@@ -69,6 +94,8 @@ const query = `
       id
       slug
       title
+      abstract
+      ingredients
       coverImage {
         url
       }
