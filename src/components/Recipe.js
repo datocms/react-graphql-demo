@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import client from "../client.js";
 import Markdown from "react-markdown";
 
-const Post = props => {
-  const [post, setPost] = useState();
+const Recipe = props => {
+  const [recipe, setRecipe] = useState();
   const [isFetching, setIsFetching] = useState(false);
 
   useEffect(
@@ -14,7 +14,7 @@ const Post = props => {
             slug: props.match.params.slug
           };
           const result = await client.request(query, variables);
-          setPost(result.post);
+          setRecipe(result.recipe);
           setIsFetching(false);
         } catch (error) {
           console.error(JSON.stringify(error, undefined, 2));
@@ -30,16 +30,16 @@ const Post = props => {
   return (
     <section>
       {isFetching ? (
-        <h2>Loading post...</h2>
+        <h2>Loading recipe...</h2>
       ) : (
-        post && (
+        recipe && (
           <article>
-            <h1>{post.title}</h1>
-            <div className="Post-placeholder">
-              <img alt={post.title} src={post.coverImage.url} />
+            <h1>{recipe.title}</h1>
+            <div className="Recipe-placeholder">
+              <img alt={recipe.title} src={recipe.coverImage.url} />
             </div>
-            <Markdown source={post.abstract} escapeHtml={false} />
-            {post.content.map(block => {
+            <Markdown source={recipe.abstract} escapeHtml={false} />
+            {recipe.content.map(block => {
               if (block.__typename === "TextImageBlockRecord") {
                 return (
                   <div key={block.id}>
@@ -64,8 +64,8 @@ const Post = props => {
 };
 
 const query = `
-  query singlePost($slug: String!) {
-    post: post(filter: { slug: { eq: $slug } }) {
+  query singleRecipe($slug: String!) {
+    recipe: recipe(filter: { slug: { eq: $slug } }) {
       id
       slug
       title
@@ -92,4 +92,4 @@ const query = `
   }
 `;
 
-export default Post;
+export default Recipe;

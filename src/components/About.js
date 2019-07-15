@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import client from "../client.js";
 
-const Post = () => {
+const Authors = () => {
   const [authors, setAuthors] = useState();
   const [isFetching, setIsFetching] = useState(false);
 
@@ -59,4 +59,4 @@ const query = `
   }
 `;
 
-export default Post;
+export default Authors;

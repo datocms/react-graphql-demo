@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import client from "../client.js";
 
-const POSTS_PER_PAGE = 4;
+const RECIPES_PER_PAGE = 4;
 
 const Home = () => {
-  const [recipies, setRecipies] = useState();
+  const [recipes, setRecipes] = useState();
   const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const result = await client.request(query, variables);
-        setRecipies(result.posts);
+        setRecipes(result.recipes);
         setIsFetching(false);
       } catch (error) {
         console.error(JSON.stringify(error, undefined, 2));
@@ -26,42 +26,44 @@ const Home = () => {
   return (
     <section>
       <ul className="Home-ul">
-        {recipies &&
-          recipies.map(post => (
-            <li className="Home-li" key={`post-${post.id}`}>
-              <Link to={`/post/${post.slug}`} className="Home-link">
+        {recipes &&
+          recipes.map(recipe => (
+            <li className="Home-li" key={`recipe-${recipe.id}`}>
+              <Link to={`/recipe/${recipe.slug}`} className="Home-link">
                 <img
-                  alt={post.title}
+                  alt={recipe.title}
                   className="Home-img"
-                  src={post.coverImage.url}
+                  src={recipe.coverImage.url}
                 />
                 <div>
-                  <h3>{post.title}</h3>
-                  <p>{post.abstract}</p>
+                  <h3 className="Home-li-title">{recipe.title}</h3>
+                  <p>
+                    {recipe.abstract
+                      .split(" ")
+                      .slice(0, 10)
+                      .join(" ")}
+                    ...
+                  </p>
                 </div>
               </Link>
             </li>
           ))}
       </ul>
-      <div className="Home-showMoreWrapper">
-        {false ? (
-          <button className="Home-button" disabled={isFetching}>
-            {isFetching ? "Loading..." : "Show More Posts"}
-          </button>
-        ) : (
-          ""
-        )}
-      </div>
+      {recipes && recipes.length > RECIPES_PER_PAGE && (
+        <button className="Home-button" disabled={isFetching}>
+          {isFetching ? "Loading..." : "Show More Recipes"}
+        </button>
+      )}
     </section>
   );
 };
 
 const query = `
-  query posts($first: IntType!, $skip: IntType!) {
-    meta: _allPostsMeta {
+  query recipes($first: IntType!, $skip: IntType!) {
+    meta: _allRecipesMeta {
       count
     }
-    posts: allPosts(orderBy: _createdAt_DESC, first: $first, skip: $skip) {
+    recipes: allRecipes(orderBy: _createdAt_DESC, first: $first, skip: $skip) {
       id
       title
       slug
@@ -75,7 +77,7 @@ const query = `
 
 const variables = {
   skip: 0,
-  first: POSTS_PER_PAGE
+  first: RECIPES_PER_PAGE
 };
 
 export default Home;
