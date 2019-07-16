@@ -7,6 +7,7 @@ const Authors = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsFetching(true);
       try {
         const result = await client.request(query);
         setAuthors(result.authors);
@@ -23,7 +24,7 @@ const Authors = () => {
   return (
     <section>
       {isFetching ? (
-        <h2>Loading authors...</h2>
+        <p className="Home-li-title">...Loading</p>
       ) : (
         <div>
           {authors &&

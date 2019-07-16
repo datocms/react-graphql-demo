@@ -10,6 +10,7 @@ const Home = props => {
 
   useEffect(
     () => {
+      setIsFetching(true);
       const variables = {
         skip: props.location.search || 0,
         first: RECIPES_PER_PAGE
@@ -56,13 +57,14 @@ const Home = props => {
             </li>
           ))}
       </ul>
+      {isFetching && <p className="Home-li-title">...Loading</p>}
       {recipes && recipes.meta.count > RECIPES_PER_PAGE && (
         <a
           className="Home-button"
           disabled={isFetching}
           href={`?skip=${props.match.params.skip || 0 + RECIPES_PER_PAGE}`}
         >
-          {isFetching ? "Loading..." : "Show More Recipes"}
+          Show More Recipes
         </a>
       )}
     </section>
