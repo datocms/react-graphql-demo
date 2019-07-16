@@ -1,5 +1,5 @@
 {
-  "name": "react-apollo-demo",
+  "name": "react-graphql-demo",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
