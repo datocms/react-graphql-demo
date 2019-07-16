@@ -7,7 +7,6 @@ body
   line-height: 1.5
 
 a
-  text-decoration: none
   color: inherit
 
 #root
@@ -24,16 +23,12 @@ a
 .Header-h1
   font-size: 48px
   text-transform: uppercase
-  background: linear-gradient(to right,#f783de 0%,#3d57ff 50%, #7af8ff 100%)
-  -webkit-background-clip: text
-  -webkit-text-fill-color: transparent
-  background-size: 500%
+  color: #000
 
 .Header-h1:hover
-  animation-name: gradient
-  animation-duration: 1s
-  animation-iteration-count: 1
-  animation-fill-mode: forwards
+  text-shadow: 6px 6px #ffb073
+  transition: all 0.3s ease-out
+  transition: all 0.3s ease-out
 
 .Header-nav
   padding: 20px 0
@@ -41,18 +36,22 @@ a
   border-bottom: 4px solid #000
   color: #000
 
-.Header-isActive
-  color: #ffb073
-
 .Header-navLink
+  text-decoration: none
   text-transform: uppercase
+  font-size: 20px
   margin-left: 10px
   margin-right: 10px
   font-weight: bold
+  transition: all 0.3s ease-out
+  text-shadow: 6px 6px #ffb073
 
 .Header-navLink:hover
-  color: #ffb073
+  text-shadow: 2px 2px #ffb073
+
+.Header-isActive
   transition: all 0.3s ease-out
+  text-shadow: 2px 2px #ffb073
 
 /* Home
 
@@ -74,6 +73,7 @@ a
   text-transform: uppercase
 
 .Home-link
+  text-decoration: none
   display: flex
   color: #000
   align-items: center
@@ -88,13 +88,14 @@ a
 
 .Home-button
   font-size: 16px
+  display: block
+  width: 100%
   text-align: center
   color: white
   font-weight: bold
   text-transform: uppercase
   padding: 16px 24px
   background: #000
-  display: block
   cursor: pointer
 
 .Home-button:disabled
@@ -169,9 +170,3 @@ a
   font-weight: bold
   font-size: 40px
   margin-right: 20px
-
-@keyframes gradient
-  0%
-    background-position: 0% 50%
-  100%
-    background-position: 100%

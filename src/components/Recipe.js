@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import client from "../client.js";
 import Markdown from "react-markdown";
 import Imgix from "react-imgix";
+import { Link } from "react-router-dom";
 
 const Recipe = props => {
   const [recipe, setRecipe] = useState();
@@ -36,6 +37,9 @@ const Recipe = props => {
         recipe && (
           <article>
             <h1 className="Recipe-title">{recipe.title}</h1>
+            <strong>
+              By <Link to={"/about"}>{recipe.author.name}</Link>
+            </strong>
             <Markdown
               source={recipe.abstract}
               escapeHtml={false}
@@ -94,6 +98,9 @@ const query = `
       id
       slug
       title
+      author {
+        name
+      }
       abstract
       ingredients
       coverImage {

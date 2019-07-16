@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import client from "../client.js";
 
-const RECIPES_PER_PAGE = 2;
+const RECIPES_PER_PAGE = 3;
 
 const Home = props => {
   const [recipes, setRecipes] = useState();
-  const [skip, setSkip] = useState(0);
   const [isFetching, setIsFetching] = useState(false);
 
   useEffect(
     () => {
       const variables = {
-        skip,
+        skip: props.location.search || 0,
         first: RECIPES_PER_PAGE
       };
       const fetchData = async () => {
@@ -28,7 +27,7 @@ const Home = props => {
 
       fetchData();
     },
-    [skip]
+    [props.location.search]
   );
 
   return (
@@ -58,13 +57,13 @@ const Home = props => {
           ))}
       </ul>
       {recipes && recipes.meta.count > RECIPES_PER_PAGE && (
-        <button
+        <a
           className="Home-button"
           disabled={isFetching}
-          onClick={() => setSkip(skip + RECIPES_PER_PAGE)}
+          href={`?skip=${props.match.params.skip || 0 + RECIPES_PER_PAGE}`}
         >
           {isFetching ? "Loading..." : "Show More Recipes"}
-        </button>
+        </a>
       )}
     </section>
   );
