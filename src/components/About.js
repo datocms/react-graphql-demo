@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import client from "../client.js";
+import { Image } from "react-datocms"
 
 const Authors = () => {
   const [authors, setAuthors] = useState();
@@ -31,10 +32,9 @@ const Authors = () => {
             authors.map(author => (
               <div className="About-author" key={author.id}>
                 <div className="About-infoHeader">
-                  <img
+                  <Image
                     className="About-img"
-                    alt={author.name}
-                    src={author.avatar.url}
+                    data={author.avatar.responsiveImage}
                   />
                   <h2>{author.name}</h2>
                 </div>
@@ -54,7 +54,17 @@ const query = `
       description
       name
       avatar {
-        url
+        responsiveImage(imgixParams: { fit: crop, crop: faces, w: 300, h: 300 }) {
+          aspectRatio
+          width
+          sizes
+          srcSet
+          src
+          webpSrcSet
+          alt
+          title
+          base64
+        }
       }
     }
   }
