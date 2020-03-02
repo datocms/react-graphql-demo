@@ -2,7 +2,7 @@
   "name": "React GraphQL",
   "previewImage": "https://raw.githubusercontent.com/datocms/react-graphql-demo/master/screenshot.png",
   "templateId": "13808",
-  "deploymentType": "netlify",
+  "deploymentType": "static",
   "netlifyBuildCommand": "yarn build",
   "netlifyBuildDirectory": "build",
   "datocmsApiTokenEnvName": "REACT_APP_DATO_API_TOKEN"
