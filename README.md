@@ -15,7 +15,7 @@ Add a `.env` file with your read-only API token, so that React can access the in
 
 then run:
 
-`yarn && yarn start`
+`npm i && npm start`
 
 ### Read more
 
