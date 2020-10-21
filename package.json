@@ -13,7 +13,7 @@
     "react-imgix": "^8.6.3",
     "react-markdown": "^4.1.0",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "^3.4.3"
+    "react-scripts": "^3.4.4"
   },
   "scripts": {
     "start": "react-scripts start",
