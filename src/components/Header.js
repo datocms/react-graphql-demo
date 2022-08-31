@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-export default () => (
+const Header = () => (
   <header className="Header-header">
     <h1 className="Header-h1">I know my kitChen - blog</h1>
     <nav className="Header-nav">
@@ -23,3 +23,5 @@ export default () => (
     </nav>
   </header>
 );
+
+export default Header;
