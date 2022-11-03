@@ -1,3 +1,5 @@
+# ⛔️ DEPRECATED ⛔️
+
 # DatoCMS example blog using React & GraphQL Request
 
 ## Set up your own
